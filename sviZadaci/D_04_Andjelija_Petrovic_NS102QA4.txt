@@ -1,0 +1,88 @@
+/*
+1.korisniku se nudi da unese redom ocene za kvalitet i uslugu restorana
+2.ocene sačuvati u dve odvojene promenljive (ocene su celi brojevi od 1 do 10).
+3.ako korisnik nije uneo validne podatke za ocene - ispisati da pod nisu validni
+4.ako je prosek ocena veci od 5 - ispisati ispisati poruku "Prosek veci od 5";
+5.ako je prosek manji od 5 i ocena za kvalitet je 1 - ispisati "Treba popraviti kvalitet";
+6.ako je prosek manji od 5 i ocena za uslugu je 1 - ispisati "Treba popraviti kvalitet";
+
+
+import java.util.Scanner;
+
+public class D_04_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[]args){
+
+        Scanner skener1 = new Scanner(System.in);
+        System.out.println("Unesite ocenu za kvalitet od 1 do 10");
+        int k = skener1.nextInt();
+        Scanner skener2 = new Scanner(System.in);
+        System.out.println("Unesite ocenu za uslugu od 1 do 10");
+        int u = skener2.nextInt();
+
+        double prosek = (k+u)/2.0;
+
+        if( k<1 || k>10 || u<1 || u>10){
+            System.out.println("Podaci nisu validni, unesite ocenu od 1 do 10");
+        }else if( prosek>5 ){
+            System.out.println("Prosek ocena je veci od 5.");
+        }else if( prosek<5 && k==1 ){
+            System.out.println("Treba popraviti kvalitet.");
+        }else if( prosek<5 && u==1 ){
+            System.out.println("Treba popraviti uslugu.");
+        }
+    }
+}
+*/
+
+/*
+po mom nekom vidjenju teksta zadatka, nije naglaseno da li da pokrivamo opciju k==1 i u==1,
+ali u slucaju da i to zelimo da pokrijemo (ima logike) - if else deo petlje glasio bi:
+        if( k<1 || k>10 || u<1 || u>10){
+            System.out.println("Podaci nisu validni, unesite ocenu od 1 do 10");
+        }else if( prosek>5 ){
+            System.out.println("Prosek ocena je veci od 5.");
+        }else{
+            if( prosek<5 && k==1 ){
+                System.out.println("Treba popraviti kvalitet.");
+            }
+            if( prosek<5 && u==1 ){
+                System.out.println("Treba popraviti uslugu.");
+            }
+        }
+ */
+
+/*
+Od korisnika zahtevati da unese mesec. -->switch verzija
+U zavisnosti koji mesec je unet: Ispisati koliko taj mesec ima dana.
+(racunati da godina nije prestupna)*/
+
+import java.util.Scanner;
+
+public class D_04_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[]args){
+
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Unesite ime meseca: ");
+        String mesec = skener.nextLine();
+        switch(mesec.toLowerCase()) {
+            case "januar":
+            case "mart":
+            case "maj":
+            case "jul":
+            case "avgust":
+            case "oktobar":
+            case "decembar":
+                System.out.println("Vas izabrani mesec ima 31 dan");
+                break;
+            case "februar":
+            case "april":
+            case "jun":
+            case "septembar":
+            case "novembar":
+                System.out.println("Vas izabrani mesec ima 30 dana");
+                break;
+            default:
+                System.out.println("Niste uneli validan mesec");
+        }
+    }
+}

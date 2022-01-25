@@ -1,0 +1,98 @@
+//kafa
+import java.util.Arrays;
+public class Kafa {
+    private String naziv;
+    private int velicina;
+    private String[] sastojci;
+    private double cena;
+}
+public Kafa(String naziv, int velicina, String[] sastojci, int cena) {
+    this.naziv = naziv;
+    this.velicina = velicina;
+    this.sastojci = sastojci;
+    this.cena = cena;
+}
+public Kafa(){
+}
+public String getNaziv() {
+    return naziv;
+}
+public int getVelicina() {
+    return velicina;
+}
+public String[] getSastojci() {
+    return sastojci;
+}
+public double getCena() {
+    return cena;
+}
+public void setNaziv(String naziv) {
+    this.naziv = naziv;
+}
+public void setVelicina(int velicina) {
+    this.velicina = velicina;
+}
+public void setSastojci(String[] sastojci) {
+    this.sastojci = sastojci;
+}
+public void setCena(double cena) {
+    this.cena = cena;
+}
+public double Popust(double procenat) {
+    double popust = this.cena * (procenat / 100);
+    this.cena = cena - popust;
+    return cena;
+}
+}
+
+
+//prodavnica
+import java.util.Arrays;
+public class Prodavnica {
+    private Kafa[] kafe;
+    private String adresa;
+    private static int brojProdavnica;
+    private int brojKupljenihProizvoda;
+public Kafa[] getKafe() { return kafe; }
+
+public String getAdresa() { return adresa; }
+
+public static int getBrojProdavnica() { 
+        return brojProdavnica;
+    }
+
+public int getBrojKupljenihProizvoda() {
+    return brojKupljenihProizvoda; 
+}
+public void setKafe(Kafa[] kafe) { this.kafe = kafe; }
+public void setAdresa(String adresa) { this.adresa = adresa; }
+public static int setBrojProdavnica() { return brojProdavnica; }
+public void setBrojKupljenihProizvoda(int brojKupljenihProizvoda) {
+     this.brojKupljenihProizvoda = brojKupljenihProizvoda;
+}
+public void kupiKafu(Kafa kafa, int kolicina) {
+    double racun = kafa.getCena() * kolicina;
+    System.out.println("Vas racun je: " + racun);
+}
+
+
+//main
+import java.util.Arrays;
+public class Main {
+   public static void main(String[] args) {
+      Kafa kafa1 = new Kafa("Nes", 250, new String[]{"instant kafa", "mleko", "voda", “secer”}, 200);
+      Kafa kafa2 = new Kafa("Turska kafa", 150, new String[]{"voda”, “turska kafa”, “secer"}, 150);
+      Kafa kafa3 = new Kafa("Kapucino", 200, new String[]{“kafa”, "light mleko", "voda", "secer"}, 250);
+      System.out.println(kafa3.Popust(15));
+
+      Kafa[] kafe1 = {kafa1, kafa2, kafa3};
+      Kafa[] kafe2 = {kafa1, kafa2};
+      Prodavnica prodavnica1 = new Prodavnica(kafe1, "Hilandarska 1");  //adrese su opcione
+      Prodavnica prodavnica2 = new Prodavnica(kafe2, "Hilandarska 2");
+      System.out.println(Prodavnica.getBrojProdavnica());
+      prodavnica1.kupiKafu(kafa1, 2);
+      prodavnica2.kupiKafu(kafa2, 1);
+      prodavnica2.kupiKafu(kafa3, 3);
+}
+
+

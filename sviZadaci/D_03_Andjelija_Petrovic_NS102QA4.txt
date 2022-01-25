@@ -1,0 +1,36 @@
+--1. prikazi datum, id_korisnik, ukupna_cena iz narudzbine koja ima sve ocene 5
+SELECT datum, id_korisnik, ukupna_cena FROM narudzbina
+JOIN ocene ON ocene.id_narudzbina=narudzbina.id_narudzbina
+WHERE kvalitet='5' AND cena='5' AND usluga='5';
+
+--2. prikazi ime korisnika koji je dao sve ocene 5
+SELECT korisnicko_ime FROM korisnik
+JOIN narudzbina ON narudzbina.id_korisnik = korisnik.id_korisnik
+JOIN ocene ON narudzbina.id_narudzbina = ocene.id_narudzbina
+WHERE kvalitet = 5 AND cena = 5 AND usluga = 5;
+
+--3.prikazati prosecnu ocenu za uslugu za svakog korisnika (grupisati po korsnicima)
+SELECT AVG(ocene.usluga), korisnik.id_korisnik, korisnik.korisnicko_ime FROM ocene
+JOIN narudzbina ON narudzbina.id_narudzbina = ocene.id_narudzbina
+JOIN korisnik ON narudzbina.id_korisnik = korisnik.id_korisnik
+
+--4. prikazi prosecnu ocenu za uslugu od ocena koje je dao Pera
+SELECT AVG(ocene.usluga), korisnik.korisnicko_ime FROM ocene
+JOIN narudzbina ON narudzbina.id_narudzbina = ocene.id_narudzbina
+JOIN korisnik ON narudzbina.id_korisnik = korisnik.id_korisnik
+WHERE korisnik.korisnicko_ime LIKE '%Pera%'
+GROUP BY korisnik.korisnicko_ime;
+GROUP BY korisnik.id_korisnik;
+
+--6. prikazati koliko je narudzbina imao svaki restoran
+--prikazi samo id_restorana i broj narudzbina za taj restoran
+SELECT COUNT(narudzbina.id_narudzbina), narudzbina.id_restorana FROM narudzbina 
+JOIN restoran_objekat ON restoran_objekat.id_restorana=narudzbina.id_restorana
+GROUP BY narudzbina.id_restorana;
+
+--7. prikazi adresu restorana i sumu koliko je koji restoran zaradio, desc.
+SELECT restoran_objekat.adresa, SUM(narudzbina.ukupna_cena) FROM narudzbina
+JOIN restoran_objekat ON restoran_objekat.id_restorana=narudzbina.id_restorana
+GROUP BY restoran_objekat.adresa
+ORDER BY SUM(narudzbina.ukupna_cena) DESC; 
+

@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+/* zadatak 1:
+Korisnik unosi recenicu. Potrebno je:
+izbrojati koliko reci ima u toj recenici
+i taj broj ispisati u konzolu. (preko metoda)
+ */
+
+public class D_08_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Unesite recenicu: ");
+        String unetaRec = scan.nextLine();
+        System.out.println(brojReci(unetaRec));
+
+    }
+    public static int brojReci (String rec){
+        String[] noviNiz = rec.split(" ");
+        return noviNiz.length;
+    }
+}
+
+/* zadatak 2:
+Inicijalizujte neki string. Korisnik unosi neko slovo,
+Proveriti koliko puta se to slovo nalazi u stringu.
+ */
+
+/*
+public class D_08_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+
+        String zadataRec = "Otorinolaringolog";
+        System.out.println(brojPonavljanjaSlova(zadataRec));
+
+    }
+
+    public static int brojPonavljanjaSlova(String rec) {
+        int brojac = 0;
+        String[] slovaZadateReci = rec.split("");
+        Scanner s = new Scanner(System.in);
+        System.out.print("Unesite jedno slovo: ");
+        String korisnikovoSlovo = s.nextLine().toLowerCase();
+        for (int i = 0; i < slovaZadateReci.length; i++) {
+            if (korisnikovoSlovo.equals(slovaZadateReci[i])) {
+                brojac++;
+            }
+
+        }
+        return brojac;
+    }
+}
+*/
+
+/*
+
+*/zadatak 3:
+Dvema matricama zameniti kolone i redove.
+/*
+public static void main(String[] args) {
+    int[][] matrica={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+}
+public static int[][] obrnutaMatrica(int[][] matrica){
+    int[][] obrnutaMatrica= new int[matrica[0].length][matrica.length];
+    for(int i=0; i< matrica.length;i++){
+        for(int j=0;j<matrica[i].length;j++){
+            obrnutaMatrica[j][i]=matrica[i][j];
+        }
+    }
+    return obrnutaMatrica;
+}
+*/
+

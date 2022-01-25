@@ -1,0 +1,125 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.security.cert.X509Certificate;
+import java.sql.Time;
+
+public class Dresses {
+    private WebDriver driver;
+
+    @FindBy(xpath = "//body/div[@id='page']/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/ul[1]/li[3]/a[1]")
+    WebElement summerDresses;
+
+    @FindBy(xpath ="//body/div[@id='page']/div[2]/div[1]/div[3]/div[2]/ul[1]/li[1]/div[1]/div[2]/h5[1]/a[1]")
+    WebElement dressElement1;
+
+    @FindBy(xpath = "//body/div[@id='page']/div[2]/div[1]/div[3]/div[2]/ul[1]/li[1]/div[1]/div[3]/div[2]/a[1]")
+    WebElement addToCompareElement1;
+
+    @FindBy(xpath = "//body/div[@id='page']/div[2]/div[1]/div[3]/div[2]/ul[1]/li[3]/div[1]/div[2]/h5[1]/a[1]")
+    WebElement dressElement2;
+
+    @FindBy(xpath = "//body/div[@id='page']/div[2]/div[1]/div[3]/div[2]/ul[1]/li[3]/div[1]/div[3]/div[2]/a[1]")
+    WebElement addToCompareElement2;
+
+    @FindBy(xpath = "//body/div[@id='page']/div[2]/div[1]/div[3]/div[2]/div[2]/div[2]/form[1]/button[1]")
+    WebElement compareButton;
+
+    public Dresses(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void compareDresses() throws InterruptedException {
+        summerDresses.click();
+        Actions action = new Actions(driver);
+        action.moveToElement(dressElement1);
+        action.moveToElement(addToCompareElement1);
+        action.click().build().perform();
+        Thread.sleep(1000);
+        action.moveToElement(dressElement2);
+        action.moveToElement(addToCompareElement2);
+        action.click().build().perform();
+        Thread.sleep(1000);
+        compareButton.click();
+
+    }
+
+    public void compareDressesOneDress() throws InterruptedException {
+        summerDresses.click();
+        Actions action = new Actions(driver);
+        action.moveToElement(dressElement1);
+        action.moveToElement(addToCompareElement1);
+        action.click().build().perform();
+        Thread.sleep(1000);
+        compareButton.click();
+    }
+}
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import pages.Dresses;
+import utils.PropReader;
+
+import java.io.IOException;
+import java.time.Duration;
+
+public class TestCompareDresses {
+    private WebDriver wd;
+
+    @BeforeClass
+    public void init() throws IOException {
+        System.setProperty("webdriver.chrome.driver",
+                PropReader.fetchProperty("WEBDRIVER.CHROME.PATH"));
+
+        wd = new ChromeDriver();
+
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
+//    @AfterClass
+//    public void zatvoriWebDriver() {
+//        wd.close();
+//        System.out.println("Web driver closed");
+//    }
+
+    @Test
+    public void testCompareDresses() throws IOException, InterruptedException {
+        System.out.println("Go to http://automationpractice.com/index.php?id_category=8&controller=category");
+        wd.get("http://automationpractice.com/index.php?id_category=8&controller=category");
+        wd.manage().window().maximize();
+
+        System.out.println("Assert that the current url is correct");
+        Assert.assertEquals(wd.getCurrentUrl(), "http://automationpractice.com/index.php?id_category=8&controller=category",
+                "The current url should be equal to http://automationpractice.com/index.php?id_category=8&controller=category");
+        System.out.println("The current url is correct");
+        System.out.println();
+
+        Dresses dressesPage = new Dresses(wd);
+
+        System.out.println("Add 2 dresses for comparison");
+        dressesPage.compareDresses();
+        System.out.println();
+
+        System.out.println("Assert that 'Printed Summer Dress' is on the page");
+        Assert.assertTrue(wd.getPageSource().contains("Printed Summer Dress"));
+        System.out.println("Printed Summer Dress is on the page");
+        System.out.println();
+
+        System.out.println("Assert that 'Printed Chiffon Dress' is on the page");
+        Assert.assertTrue(wd.getPageSource().contains("Printed Chiffon Dress"));
+        System.out.println("Printed Chiffon Dress is on the page");
+    }
+
+}
+

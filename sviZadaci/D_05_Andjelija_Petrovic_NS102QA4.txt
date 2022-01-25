@@ -1,0 +1,104 @@
+/*
+ispisati u konzoli sumu svih parnih brojeva od 1 do n,
+gde n unosi korisnik (preko petlji).
+
+import java.util.Scanner;
+
+public class D_05_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Unesite broj do kojeg računamo sumu parnih brojeva: ");
+        int n = skener.nextInt();
+        int sum = 0;
+        for(int i=1; i<=n; i++)
+            if(i%2==0){
+                sum = sum + i; //ili sum+=i;
+            }
+        System.out.println("Suma svih parnih brojeva je: " +sum);
+    }
+}
+*/
+
+/*
+napraviti zadati oblik sa zvezdicama (obrnuto od primera na casu na casu)
+
+import java.util.Scanner;
+
+public class D_05_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+        //ubacila sam skener cisto radi vezbe, domaci zahteva samo direktno definisanje nekog broja
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Unesite broj redova: ");
+        int n = skener.nextInt();
+
+        for(int i=1; i<=n; i++) {
+            for (int j = n; j >= i; j--) {
+                System.out.print("  ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+*/
+
+/*
+Deklaracija i inicijalizacija niza celih brojeva.
+Od tog niza napraviti novi niz koji ce imati obrnuti redosled:
+{1,2,3,4,5} --> {5,4,3,2,1}
+
+import java.util.Arrays;
+
+public class D_05_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+        int[] niz1 = {1,2,3,4,5};
+        int[] niz2 = new int[5];
+        for (int i=0; i<niz1.length; i++){
+            niz2[niz1.length-1-i]=niz1[i];
+        }
+        System.out.println(Arrays.toString(niz1));
+        System.out.println(Arrays.toString(niz2));
+    }
+}
+*/
+
+/*
+Deklarisati i inicijalizovati niz celih brojeva.
+Korisnik unosi jedan ceo broj koji se cuva u promenljivoj x.
+Proveriti da li se taj broj x nalazi u nizu, ako da - ispisi "Nadjen",
+ako ne - ispisi "Ovaj broj ne postoji u nizu"
+*/
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class D_05_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+
+        int[] niz = {1, 2, 3, 3, 4, 5, 5, 5};
+
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Unesite neki broj: ");
+        int x = skener.nextInt();
+        int brojPonavljanja = 0;
+        boolean flag = false;
+
+        for (int i = 0; i < niz.length; i++) {
+                if (niz[i] == x) {
+                    brojPonavljanja++;
+                    flag = true;
+                }
+        }
+
+        if(flag){
+            System.out.println("Vas broj je nadjen u nizu:");
+            System.out.println(Arrays.toString(niz));
+            System.out.println("Vas broj se u datom nizu nalazi " + brojPonavljanja + " puta.");
+        }else{
+            System.out.println("Vas broj nije nadjen u nizu:");
+            System.out.println(Arrays.toString(niz));
+        }
+
+    }
+}

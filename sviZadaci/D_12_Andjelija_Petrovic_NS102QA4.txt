@@ -1,0 +1,36 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Domaci12 {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        System.setProperty("webdriver.chrome.driver",
+                "C:\\Users\\Andjelija\\Desktop\\ITBootcamp\\chromedriver\\chromedriver_win32\\chromedriver.exe");
+        WebDriver wd = new ChromeDriver();
+        wd.get("https://www.wikipedia.org/");
+        wd.manage().window().maximize();
+
+        wd.findElement(By.xpath("//select[@id='searchLanguage']")).click();
+        Thread.sleep(5000);
+        wd.findElement(By.xpath("//option[contains(text(),'Српски / Srpski')]")).click();
+        Thread.sleep(5000);
+        wd.findElement(By.xpath("//input[@id='searchInput']")).sendKeys("Java");
+        Thread.sleep(5000);
+        wd.findElement(By.xpath("//body/div[3]/form[1]/fieldset[1]/div[1]/div[2]/div[1]/a[3]")).click();
+        Thread.sleep(5000);
+
+        WebElement title = wd.findElement(By.xpath("//h1[@id='firstHeading']"));
+        if(title.getText().equals("Java (programming language)")){
+            System.out.println("Text je isti.");
+        }else{
+            System.out.println("Text nije isti.");
+        }
+
+        wd.close();
+
+    }
+
+}

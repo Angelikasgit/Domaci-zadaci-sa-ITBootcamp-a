@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class D_06_Andjelija_Petrovic_NS102QA4 {
+    public static void main(String[] args) {
+
+        Scanner skener = new Scanner(System.in);
+        System.out.println("Da li zelite da budete X ili O? Upisite: ");
+        String igrac = skener.nextLine().toUpperCase();
+        String komp = "";
+        if (igrac.equals("X")) {
+           komp = "O";
+        } else if (igrac.equals("O")){
+            komp = "X";
+        }else{
+            System.out.println("Izabrani karakter nije validan.");
+            return;
+        }
+
+        String[] niz = new String[9];
+         for (int i = 0; i < niz.length; i++) {
+            System.out.print(niz[i]);
+            System.out.print(" ");
+            if (i == 2 || i == 5) {
+                System.out.println();
+            }
+         }
+
+
+         for (int j = 0; j < niz.length; j++) {
+
+            System.out.println();
+            int pozicija;
+            do{
+                System.out.println("Izaberite vasu poziciju: ");
+                pozicija = skener.nextInt();
+            }while(niz[pozicija] != null);
+            niz[pozicija] = igrac;
+
+            if (j == 4) {
+                for (int i = 0; i < niz.length; i++) {
+                    if (i == 3) {
+                        System.out.println();
+                        System.out.print(niz[i] + " ");
+                    } else if (i == 6) {
+                        System.out.println();
+                        System.out.print(niz[i] + " ");
+                    } else {
+                        System.out.print(niz[i] + " ");
+                    }
+
+                }
+                break;
+            }
+
+            int rand;
+            do {
+                rand = (int) Math.abs(Math.floor((Math.random()) * 10 - 1));
+            } while (niz[rand] != null);
+            niz[rand] = komp;
+
+            for (int i = 0; i < niz.length; i++) {
+                if (i == 3) {
+                    System.out.println();
+                    System.out.print(niz[i] + " ");
+                } else if (i == 6) {
+                    System.out.println();
+                    System.out.print(niz[i] + " ");
+                } else {
+                    System.out.print(niz[i] + " ");
+                }
+
+            }
+
+
+        }
+
+    }
+}
